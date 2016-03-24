@@ -1,0 +1,7 @@
+El dato numerico es 20.
+El dato de texto es -Este dato de texto-
+Info a texto es (20,-Este dato de texto-)
+Ingrese info (con el formato de info_a_texto) seguido de un punto.
+ Ejemplo: (10,hola mundo):
+ El dato numerico es 50
+El dato de texto es test de info_t
