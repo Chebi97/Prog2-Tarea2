@@ -9,6 +9,7 @@
 #include "../include/info.h"
 
 #include <stddef.h>
+#include <stdio.h>
 
 // nodo con punteros al anterior y al siguiente
 struct nodo {
@@ -171,22 +172,23 @@ void mover_antes(localizador loc1, localizador loc2, lista &lst) {
 
 
 void insertar_segmento_despues(lista &sgm, const localizador loc, lista &lst) {
-  if (es_vacia_lista) {
+  if (es_vacia_lista(lst)) {
     lst = sgm;
   }
   else {
-    loc->siguiente->anterior = sgm->final;
+    if(!es_final_lista(loc, lst))
+      loc->siguiente->anterior = sgm->final;
     sgm->final->siguiente = loc->siguiente;
     loc->siguiente = sgm->inicio;
     sgm->inicio->anterior = loc;
   }
   sgm->inicio = NULL;
-  sgm->final = NUL;
+  sgm->final = NULL;
 }
 
 lista separar_segmento(localizador desde, localizador hasta, lista &lst) {
   lista res = NULL;
-  if (!es_lista_vacia(lst)) {
+  if (!es_vacia_lista(lst)) {
     res->inicio = desde;
     res->final = hasta;
 
@@ -200,7 +202,10 @@ lista separar_segmento(localizador desde, localizador hasta, lista &lst) {
 }
 
 void remover_de_lista(localizador &loc, lista &lst) {
-  delete[] loc->dato->texto->caracteres;
+
+  info_t aux = info_lista(loc, lst);
+
+  liberar_info(aux);
   loc->siguiente->anterior = loc->anterior;
   loc->anterior->siguiente = loc->siguiente;
   delete loc;
@@ -209,24 +214,24 @@ void remover_de_lista(localizador &loc, lista &lst) {
 void liberar_lista(lista &lst) {
   if (!es_vacia_lista(lst)) {
 
-    localizador aux = lst->inicio;
-    delete[] aux->dato->texto->caracteres;
+   localizador cursor = lst->inicio;
+    liberar_info(cursor->dato);                  //(info_lista(cursor, lst));
 
-    while (siguiente(aux, lst) != NULL) {
-      aux = siguiente(aux, lst);
-      delete[] aux->dato->texto->caracteres;
-      delete aux->anterior->siguiente;
-      delete aux->anterior;
+    while (siguiente(cursor, lst) != NULL) {
+      cursor = siguiente(cursor, lst);
+      liberar_info(cursor->dato);               //(info_lista(cursor, lst));
+      delete cursor->anterior->siguiente;
+      delete cursor->anterior;
     }
-    delete aux;
-    delete lst->inicio;
-    delete lst->final;
+    delete cursor;
+    delete inicio_lista(lst); 
+    delete final_lista(lst);
   }
   delete lst;
 }
 
 bool es_vacia_lista(const lista lst) {
-  bool res = lst->inicio == NULL;
+  bool res = inicio_lista(lst) == NULL;
 
   return res;
 }
@@ -271,8 +276,9 @@ localizador anterior(const localizador loc, const lista lst) {
 bool precede_en_lista(const localizador l1, const localizador l2,
                    const lista lst) {
   bool res = l1 == l2;
-  while ( && l1->siguiente != NULL) {
-    l1 = siguiente(l1, lst);
+  localizador cursor = l1;
+  while (l1->siguiente != NULL) {
+    cursor = siguiente(l1, lst);
     res = l1 == l2;
   }
   return res;
