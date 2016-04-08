@@ -1,6 +1,5 @@
 /*
   Módulo de implementación de 'texto'.
-
   Laboratorio de Programación 2.
   InCo-FIng-UDELAR
  */

@@ -61,21 +61,22 @@ lista concatenar(const lista l1, const lista l2);
 lista reversa(const lista lst);
 
 /*
-  Devuelve el localizador que accede al primer elemento, empezando desde el 
-  inicio de `lst` y anterior a `loc`, cuyo dato numérico es mayor que el del 
+  Devuelve el localizador que accede al primer elemento, empezando desde el
+  inicio de `lst` y anterior a `loc`, cuyo dato numérico es mayor que el del
   elemento que se accede desde `loc`.
   Si ninguno de los elementos anteriores es mayor devuelve `loc`.
-  Precondición: `lst` está ordenada de manera creciente (no estricta) según su
-  dato numérico desde el inicio hasta el anterior a `loc`.
+  Precondición: ! es_vacia_lista (lst), pertenece_localizador_lista (loc, lst)
+  y `lst` está ordenada de manera creciente (no estricta) según su dato
+  numérico desde el inicio hasta el anterior a `loc`.
  */
 localizador primer_mayor(const localizador loc, const lista lst);
 
 /*
-  Mueve el elemento al que se accede con `loc` dejéndolo inmediatamente antes 
+  Mueve el elemento al que se accede con `loc` dejéndolo inmediatamente antes
   de los elementos cuyos datos numéricos son mayores que dicho elemento.
   El valor de `loc` queda ideterminado.
-  Si el dato numérico de `loc` es mayor o igual que el los de los que lo 
-  preceden no hace nada. 
+  Si el dato numérico de `loc` es mayor o igual que el los de los que lo
+  preceden no hace nada.
   Precondición: ! es_vacia_lista (lst), pertenece_localizador_lista (loc, lst)
   y `lst` está ordenada de manera creciente (no estricta) según su dato
   numérico desde el inicio hasta el anterior a `loc`.

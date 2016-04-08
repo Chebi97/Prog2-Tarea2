@@ -122,7 +122,8 @@ bool localizador_pertenece_a_lista(const localizador loc, const lista lst);
   Precondición: localizador_pertenece_a_lista(l1, lst) y
     localizador_pertenece_a_lista(l2, lst).
  */
-bool precede_en_lista(const localizador l1, const localizador l2, const lista lst);
+bool precede_en_lista(const localizador l1, const localizador l2,
+                      const lista lst);
 
 /*
   Devuelve `true` si con `loc` se accede al primer elemento de `lst` o `false`
@@ -192,7 +193,8 @@ localizador anterior_clave(const int clave, const localizador loc,
 
 /*
   Devuelve el elemento de `lst` al que se accede con `loc`.
-  Precondición: ! es_vacia_lista (lst) y localizador_pertenece_a_lista (loc, lst).
+  Precondición: ! es_vacia_lista (lst) y localizador_pertenece_a_lista (loc,
+  lst).
  */
 info_t info_lista(const localizador loc, const lista lst);
 
@@ -201,7 +203,8 @@ info_t info_lista(const localizador loc, const lista lst);
 /*
   Sustituye con `i` el elemento de `lst` al que se accede con `loc`.
   No destruye el elemento al que antes se accedía con `loc`.
-  Precondición: ! es_vacia_lista (lst) y localizador_pertenece_a_lista (loc, lst).
+  Precondición: ! es_vacia_lista (lst) y localizador_pertenece_a_lista (loc,
+  lst).
  */
 void cambiar_en_lista(const info_t i, const localizador loc, lista &lst);
 
@@ -215,7 +218,7 @@ void cambiar_en_lista(const info_t i, const localizador loc, lista &lst);
 void intercambiar(const localizador loc1, const localizador loc2, lista &lst);
 
 /*
-  Mueve el elemento al que se accede con `loc2` dejándolo inmediatamente antes 
+  Mueve el elemento al que se accede con `loc2` dejándolo inmediatamente antes
   de `loc1`.
   Los valores de `loc1` y `loc2` quedan indeterminados.
   Si loc1 == loc2 no hace nada.

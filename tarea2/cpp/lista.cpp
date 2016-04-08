@@ -1,6 +1,5 @@
 /*
   Módulo de implementación de 'lista'.
-
   Laboratorio de Programación 2.
   InCo-FIng-UDELAR
  */
@@ -277,9 +276,9 @@ bool precede_en_lista(const localizador l1, const localizador l2,
                    const lista lst) {
   bool res = l1 == l2;
   localizador cursor = l1;
-  while (l1->siguiente != NULL) {
-    cursor = siguiente(l1, lst);
-    res = l1 == l2;
+  while (cursor != NULL) {
+    localizador cursor = siguiente(l1, lst);
+    res = cursor == l2;
   }
   return res;
 }
@@ -299,5 +298,3 @@ void intercambiar(const localizador loc1, const localizador loc2, lista &lst) {
   loc1->dato = loc2->dato;
   loc2->dato = aux;
 }
-
-

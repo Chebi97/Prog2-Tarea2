@@ -1,6 +1,5 @@
 /*
   Módulo de implementación de 'uso_listas'.
-
   Laboratorio de Programación 2.
   InCo-FIng-UDELAR
  */
@@ -210,29 +209,28 @@ lista filtrado(const int clave, const comp_t criterio, const lista lst) {
 lista sublista(const nat menor, const nat mayor, const lista lst) {
   lista res = crear_lista();
 
-  if (!es_vacia_lista(lst)) {
-    localizador desde = inicio_lista(lst);
-    bool encontrado_desde = false;
+  localizador desde = inicio_lista(lst);
+  bool encontrado_desde = false;
 
-    while ((!encontrado_desde) && (desde != NULL)) {
-      if (numero_info(info_lista(desde, lst)) >= menor)
-        encontrado_desde = true;
-      else
-        desde = siguiente(desde, lst);
-    }
-    localizador hasta = final_lista(lst);
-    bool encontrado_hasta = false;
-    
-    if (encontrado_desde) {
-      while (!encontrado_hasta) {
-        if(numero_info(info_lista(hasta, lst)) <= mayor)
-          encontrado_hasta = true;
-        else
-          hasta = siguiente(hasta, lst);
-      }
-      res = segmento_lista(desde, hasta, lst);
-    }
+  while (!encontrado_desde) {
+    nat a = numero_info(info_lista(desde, lst));
+    if ( a >= menor)
+      encontrado_desde = true;
+    else
+      desde = siguiente(desde, lst);
   }
+  localizador hasta = final_lista(lst);
+  bool encontrado_hasta = false;
+
+  while (!encontrado_hasta) {
+    nat b = numero_info(info_lista(hasta, lst));
+    if( b <= mayor)
+      encontrado_hasta = true;
+    else
+      hasta = siguiente(hasta, lst);
+  }
+  res = segmento_lista(desde, hasta, lst);
+
   return res;
 }
 
@@ -243,4 +241,3 @@ void imprimir_lista(const lista lst) {
     cursor = siguiente(cursor, lst);
   }
 }
-
