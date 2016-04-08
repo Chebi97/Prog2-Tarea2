@@ -1,6 +1,5 @@
 /*
   Módulo de implementación de 'info'.
-
   Laboratorio de Programación 2.
   InCo-FIng-UDELAR
  */
@@ -28,7 +27,7 @@ info_t crear_info(const int n, const texto_t t) {
 }
 
 void liberar_info(info_t &i) {
-  delete[] i->texto->caracteres;
+  liberar_texto(i->texto);
   delete i;
 }
 

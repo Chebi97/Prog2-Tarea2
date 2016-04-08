@@ -84,7 +84,7 @@ $(TESTDIR)/test_info.sal:$(TESTDIR)/test_info.in test_info
 
 
 # lista de casos de prueba
-CASOS = 01 02 03 04 05 06 07
+CASOS = 01 02 03 04 05 06 07 08
 
 # lista de archivos, con directorio y extensión
 INS=$(CASOS:%=$(TESTDIR)/%.in)
