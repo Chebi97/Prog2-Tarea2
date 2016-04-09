@@ -172,34 +172,38 @@ lista filtrado(const int clave, const comp_t criterio, const lista lst) {
   lista res = crear_lista();
   localizador cursor = inicio_lista(lst);
   localizador destino = inicio_lista(res);
+  info_t info = NULL;
   switch (criterio) {
     case (menor): {
       while (cursor != NULL) {
+        info = crear_info(numero_info(info_lista(cursor, lst)), copiar_texto(texto_info(info_lista(cursor, lst))));
         if (numero_info(info_lista(cursor, lst)) < clave) {
-          insertar_despues(info_lista(cursor, lst), destino, res);
-          destino = siguiente(destino, res);
+          insertar_despues(info, destino, res);
+          destino = final_lista(res);
         }
-        cursor = siguiente(cursor, res);
+        cursor = siguiente(cursor, lst);
       }
       break;
     }
     case (igual): {
       while (cursor != NULL) {
+        info = crear_info(numero_info(info_lista(cursor, lst)), copiar_texto(texto_info(info_lista(cursor, lst))));
         if (numero_info(info_lista(cursor, lst)) == clave) {
-          insertar_despues(info_lista(cursor, lst), destino, res);
-          destino = siguiente(destino, res);
+          insertar_despues(info, destino, res);
+          destino = final_lista(res);
         }
-        cursor = siguiente(cursor, res);
+        cursor = siguiente(cursor, lst);
       }
       break;
     }
     case (mayor): {
       while (cursor != NULL) {
-        if (numero_info(info_lista(cursor, lst)) < clave) {
-          insertar_despues(info_lista(cursor, lst), destino, res);
-          destino = siguiente(destino, res);
+        info = crear_info(numero_info(info_lista(cursor, lst)), copiar_texto(texto_info(info_lista(cursor, lst))));
+        if (numero_info(info_lista(cursor, lst)) > clave) {
+          insertar_despues(info, destino, res);
+          destino = final_lista(res);
         }
-        cursor = siguiente(cursor, res);
+        cursor = siguiente(cursor, lst);
       }
       break;
     }
