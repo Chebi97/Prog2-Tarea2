@@ -102,24 +102,26 @@ nat cantidad(const int i, const lista lst) {
 }
 
 bool son_numeros_iguales(const lista l1, const lista l2) {
-  localizador cursor1 = inicio_lista(l1);
-  localizador cursor2 = inicio_lista(l2);
-  while (numero_info(info_lista(cursor1, l1)) == numero_info(info_lista(cursor2, l2))) {
-    cursor1 = siguiente(cursor1, l1);
-    cursor2 = siguiente(cursor2, l2);
-  }
-  bool res = (cursor1 == NULL) && (cursor2 == NULL);
+  bool res = false;
 
+  if (longitud(l1) == longitud(l2)) {
+    localizador cursor1 = inicio_lista(l1);
+    localizador cursor2 = inicio_lista(l2);
+    while (numero_info(info_lista(cursor1, l1)) == numero_info(info_lista(cursor2, l2))
+            && siguiente(cursor1, l1) != NULL) {
+      cursor1 = siguiente(cursor1, l1);
+      cursor2 = siguiente(cursor2, l2);
+    }
+    res = (cursor1 == NULL) && (cursor2 == NULL);
+  }
   return res;
 }
 
-lista concatenar(const lista l1, const lista l2) { //te limaste aca
-  lista res = crear_lista();
-
-  lista lst1 = segmento_lista(inicio_lista(l1), final_lista(l1), l1);
+lista concatenar(const lista l1, const lista l2) {
+  lista res = segmento_lista(inicio_lista(l1), final_lista(l1), l1);
   lista lst2 = segmento_lista(inicio_lista(l2), final_lista(l2), l2);
 
-  res = insertar_segmento_despues(lst2, final_lista(lst1), lst1);
+  insertar_segmento_despues(lst2, final_lista(res), res);
 
   return res;
 }
@@ -142,7 +144,8 @@ localizador primer_mayor(const localizador loc, const lista lst) {
   localizador res = loc;
   localizador cursor = inicio_lista(lst);
   bool encontrado = false;
-  while (cursor != loc && !encontrado) {
+  while (numero_info(info_lista(cursor, lst)) != numero_info(info_lista(loc, lst))
+         && !encontrado) {
     if (numero_info(info_lista(cursor, lst)) > numero_info(info_lista(loc, lst))) {
       res = cursor;
       encontrado = true;
