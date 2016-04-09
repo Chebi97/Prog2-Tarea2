@@ -107,8 +107,8 @@ bool son_numeros_iguales(const lista l1, const lista l2) {
   if (longitud(l1) == longitud(l2)) {
     localizador cursor1 = inicio_lista(l1);
     localizador cursor2 = inicio_lista(l2);
-    while (numero_info(info_lista(cursor1, l1)) == numero_info(info_lista(cursor2, l2))
-            && siguiente(cursor1, l1) != NULL) {
+    while (cursor1 != NULL &&
+           numero_info(info_lista(cursor1, l1)) == numero_info(info_lista(cursor2, l2))) {
       cursor1 = siguiente(cursor1, l1);
       cursor2 = siguiente(cursor2, l2);
     }
@@ -144,8 +144,7 @@ localizador primer_mayor(const localizador loc, const lista lst) {
   localizador res = loc;
   localizador cursor = inicio_lista(lst);
   bool encontrado = false;
-  while (numero_info(info_lista(cursor, lst)) != numero_info(info_lista(loc, lst))
-         && !encontrado) {
+  while (loc != cursor && !encontrado) {
     if (numero_info(info_lista(cursor, lst)) > numero_info(info_lista(loc, lst))) {
       res = cursor;
       encontrado = true;
@@ -164,12 +163,8 @@ void ordenar(lista &lst) {
 }
 
 lista mezcla(const lista l1, const lista l2) {
-  localizador cursor = inicio_lista(l2);
   lista res = concatenar(l1, l2);
-  while (cursor != NULL) {
-    retroceder(cursor, res);
-    cursor = siguiente(cursor, res);
-  }
+  ordenar(res);
   return res;
 }
 
