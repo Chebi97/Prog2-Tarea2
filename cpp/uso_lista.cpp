@@ -113,13 +113,13 @@ bool son_numeros_iguales(const lista l1, const lista l2) {
   return res;
 }
 
-lista concatenar(const lista l1, const lista l2) {
+lista concatenar(const lista l1, const lista l2) { //te limaste aca
   lista res = crear_lista();
 
   lista lst1 = segmento_lista(inicio_lista(l1), final_lista(l1), l1);
   lista lst2 = segmento_lista(inicio_lista(l2), final_lista(l2), l2);
 
-  insertar_segmento_despues(lst2, final_lista(lst1), lst1);
+  res = insertar_segmento_despues(lst2, final_lista(lst1), lst1);
 
   return res;
 }
