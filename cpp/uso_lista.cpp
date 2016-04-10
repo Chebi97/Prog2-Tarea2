@@ -213,7 +213,7 @@ lista filtrado(const int clave, const comp_t criterio, const lista lst) {
 
 lista sublista(const nat menor, const nat mayor, const lista lst) {
 
-  localizador desde = inicio_lista(lst);
+  /*localizador desde = inicio_lista(lst);
   bool encontrado_desde = false;
 
   while (!encontrado_desde) {
@@ -232,11 +232,20 @@ lista sublista(const nat menor, const nat mayor, const lista lst) {
       encontrado_hasta = true;
     else
       hasta = siguiente(hasta, lst);
-  }
+  }*/
+
+  localizador finallst = final_lista(lst);
+  localizador iniciolst = inicio_lista(lst);
+
+  localizador desde = siguiente_clave(menor, iniciolst, lst);
+  localizador hasta = anterior_clave(mayor, finallst, lst);  
+
   lista res = segmento_lista(desde, hasta, lst);
+
 
   return res;
 }
+
 
 void imprimir_lista(const lista lst) {
   localizador cursor = inicio_lista(lst);
