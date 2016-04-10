@@ -66,12 +66,12 @@ void cambiar_todos(const int original, const int nuevo, lista &lst) {
 }
 
 
-bool pertenece(const int i, const lista lst) {
+bool pertenece(const int i, const lista lst) { //SIGUIENTE EN FIN DE WHILE????
   bool res = false;
   localizador cursor = inicio_lista(lst);
   if (!es_vacia_lista(lst)){
     res = i == numero_info(info_lista(cursor, lst));
-    while(!res && cursor != NULL){ //ORIGINAL TENIA EL SIGUIENTE???
+    while(!res && cursor != NULL){
       cursor = siguiente(cursor, lst);
       res = i == numero_info(info_lista(cursor, lst));
     }
@@ -128,15 +128,18 @@ lista concatenar(const lista l1, const lista l2) {
 
 lista reversa(const lista lst) {
   lista res = crear_lista();
+  localizador cursor = inicio_lista(res);
+  info_t info = NULL;
   if (!es_vacia_lista(lst)) {
     localizador loc = inicio_lista(lst);
-    while (loc != final_lista(lst)) {
-      info_t info = crear_info(numero_info(info_lista(loc, lst)),
-                               copiar_texto(texto_info(info_lista(loc, lst))));
-      insertar_antes(info, inicio_lista(res), res);
+    while (loc != NULL) {
+      info = crear_info(numero_info(info_lista(loc, lst)), copiar_texto(texto_info(info_lista(loc, lst))));
+      insertar_antes(info, cursor, res);
+      cursor = inicio_lista(res);
       loc = siguiente(loc, lst);
     }
   }
+
   return res;
 }
 
@@ -245,7 +248,6 @@ lista sublista(const nat menor, const nat mayor, const lista lst) {
 
   return res;
 }
-
 
 void imprimir_lista(const lista lst) {
   localizador cursor = inicio_lista(lst);
