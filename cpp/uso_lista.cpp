@@ -71,7 +71,7 @@ bool pertenece(const int i, const lista lst) {
   localizador cursor = inicio_lista(lst);
   if (!es_vacia_lista(lst)){
     res = i == numero_info(info_lista(cursor, lst));
-    while(!res && siguiente(cursor, lst) != NULL){
+    while(!res && cursor != NULL){ //ORIGINAL TENIA EL SIGUIENTE???
       cursor = siguiente(cursor, lst);
       res = i == numero_info(info_lista(cursor, lst));
     }
